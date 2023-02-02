@@ -22,6 +22,8 @@ import ScienceIcon from "@mui/icons-material/Science";
 import Divider from "@mui/material/Divider";
 import { useRouter } from "next/router";
 import WriteMessage from "./WriteMessage";
+import CottageIcon from "@mui/icons-material/Cottage";
+import MenuIcon from "@mui/icons-material/Menu";
 
 interface MessageTypes {
   _id: string;
@@ -36,8 +38,21 @@ const fetcher = (url: string) => fetch(url).then((res) => res.json());
 function Navbar() {
   const router = useRouter();
   const [currentWindow, setcurrentWindow] = useState("");
+  const [windowWidth, setwindowWidth] = useState<number>();
+  const [responsiveNav, setresponsiveNav] = useState(false);
   useEffect(() => {
     setcurrentWindow(window.location.href);
+    setwindowWidth(window.innerWidth);
+  }, []);
+  useEffect(() => {
+    const handleWindowResize = () => {
+      setwindowWidth(window.innerWidth);
+    };
+    window.addEventListener("resize", handleWindowResize);
+
+    return () => {
+      window.removeEventListener("resize", handleWindowResize);
+    };
   }, []);
   const [msgDialogOpen, setmsgDialogOpen] = useState(false);
   const [isDrawerOpen, setisDrawerOpen] = useState(false);
@@ -50,7 +65,96 @@ function Navbar() {
   return (
     <>
       <AppBar sx={{ backgroundColor: "white" }}>
-        <Toolbar>
+        {windowWidth && windowWidth > 835 ? (
+          <Toolbar sx={{ display: "flex", justifyContent: "space-around" }}>
+            <IconButton
+              onClick={() => router.push("/")}
+              sx={{ border: "#1976D2 solid 2px" }}
+            >
+              <CottageIcon sx={{ color: "#1976D2" }} />
+            </IconButton>
+            <Button
+              startIcon={<ScienceIcon />}
+              onClick={() => router.push("/experiences")}
+            >
+              My work Expiriences
+            </Button>
+            <Button
+              startIcon={<HandymanIcon />}
+              onClick={() => {
+                setisProjectMenuOpen(true);
+              }}
+            >
+              My projects
+            </Button>
+            <Menu
+              open={isProjectMenuOpen}
+              onClose={() => {
+                setisProjectMenuOpen(false);
+              }}
+            >
+              <MenuItem onClick={() => router.push("/projects")}>Menu</MenuItem>
+              <Divider />
+              <MenuItem>Project 1</MenuItem>
+              <MenuItem>Project 2</MenuItem>
+              <MenuItem>Project 3</MenuItem>
+            </Menu>
+            <Button
+              startIcon={<SendIcon />}
+              onClick={() => setsendMessageMenuOpen(true)}
+            >
+              Send me a Message
+            </Button>
+            <Menu
+              open={sendMessageMenuOpen}
+              onClose={() => {
+                setsendMessageMenuOpen(false);
+              }}
+              sx={{ marginTop: "64px" }}
+            >
+              <MenuItem onClick={() => router.push("/email")}>
+                <ListItemIcon>
+                  <ForwardToInboxIcon />
+                </ListItemIcon>
+                Send an email
+              </MenuItem>
+              <MenuItem onClick={() => setmsgDialogOpen(true)}>
+                <ListItemIcon>
+                  <SendTimeExtensionIcon />
+                </ListItemIcon>
+                Send a message through the database
+              </MenuItem>
+            </Menu>
+            <Button startIcon={<DownloadIcon />}>Download my CV</Button>
+            <IconButton
+              size="large"
+              onClick={() => {
+                setisDrawerOpen(true);
+                mutate();
+              }}
+            >
+              <Badge badgeContent={data?.data.length} color="error">
+                <EmailIcon sx={{ color: "#1976D2" }} />
+              </Badge>
+            </IconButton>
+          </Toolbar>
+        ) : (
+          <Toolbar>
+            <Button
+              onClick={() => setresponsiveNav(true)}
+              startIcon={<MenuIcon sx={{ color: "#1976D2" }} />}
+            >
+              Navigation Menu
+            </Button>
+          </Toolbar>
+        )}
+      </AppBar>
+      <Drawer
+        anchor="top"
+        open={responsiveNav}
+        onClose={() => setresponsiveNav(false)}
+      >
+        <div className={styles.topDrawer}>
           <Button
             startIcon={<ScienceIcon />}
             onClick={() => router.push("/experiences")}
@@ -116,8 +220,8 @@ function Navbar() {
               <EmailIcon sx={{ color: "#1976D2" }} />
             </Badge>
           </IconButton>
-        </Toolbar>
-      </AppBar>
+        </div>
+      </Drawer>
       <Drawer
         anchor="right"
         open={isDrawerOpen}
@@ -145,7 +249,7 @@ function Navbar() {
             >
               {currentWindow}api/messages
             </a>
-            . I will make sure to read it if it is a private one ;{")"}
+            . I will make sure to read it if you send in a private one ;{")"}
           </p>
           <div className={styles.messageContainer}>
             {data ? (
@@ -186,6 +290,20 @@ function Navbar() {
         closeDialog={() => setmsgDialogOpen(false)}
         mutate={() => mutate()}
       />
+      {windowWidth && windowWidth < 835 ? (
+        <IconButton
+          onClick={() => router.push("/")}
+          style={{
+            backgroundColor: "#1976D2",
+            position: "fixed",
+            bottom: "25px",
+            right: "25px",
+            zIndex: "3",
+          }}
+        >
+          <CottageIcon sx={{ color: "white" }} />
+        </IconButton>
+      ) : null}
     </>
   );
 }

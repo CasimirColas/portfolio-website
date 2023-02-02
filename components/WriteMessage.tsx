@@ -54,7 +54,7 @@ function WriteMessage({ open, closeDialog, mutate }: Props) {
       <DialogContent>
         <DialogContentText>
           The message you are about to send will apear in my Mongo database and
-          if you set {"it's"} visibility to public it will show on the public
+          if you set {"it's"} visibility to public it will show up on the public
           message board. Make sure to remember your{" "}
           <b style={{ color: "red" }}>deletion code</b> if you want to remove it
           from the board later.

@@ -5,12 +5,22 @@ import Navbar from "@/components/Navbar";
 import skills from "@/data/skills";
 import FlipSkillCard from "@/components/FlipSkillCard";
 import { useRouter } from "next/router";
+import Button from "@mui/material/Button";
+import GitHubIcon from "@mui/icons-material/GitHub";
 
 export default function Home() {
   const router = useRouter();
 
   return (
-    <>
+    <div
+      style={{
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+        flexDirection: "column",
+        width: "100%",
+      }}
+    >
       <Head>
         <title>Create Next App</title>
         <meta
@@ -22,32 +32,42 @@ export default function Home() {
       </Head>
       <Background />
       <Navbar />
-      <main className={styles.main}>
-        <div className={styles.mainContent}>
-          <img
-            className={styles.pp}
-            src="/images/moi.JPG"
-            alt="my profile picture"
-          />
-          <h1 className={styles.name}>Casimir Colas</h1>
-          <h2>FULLSTACK web developper</h2>
-          <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Illum
-            inventore vel, repellendus fugit sit reprehenderit quos eveniet
-            neque ullam quasi beatae soluta repellat ex asperiores, est dicta
-            mollitia qui voluptatum!
-          </p>
-          <div>
-            <h3>Known Technologies</h3>
-            <p>Hover a card to get more information</p>
-            <div className={styles.technoTable}>
-              {skills.map((e, index: number) => (
-                <FlipSkillCard key={index} {...e} />
-              ))}
-            </div>
+
+      <main className={styles.mainContent}>
+        <img
+          className={styles.pp}
+          src="/images/moi.JPG"
+          alt="my profile picture"
+        />
+        <h1 className={styles.name}>Casimir Colas</h1>
+        <h2>FULLSTACK web developper</h2>
+        <p>
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Illum
+          inventore vel, repellendus fugit sit reprehenderit quos eveniet neque
+          ullam quasi beatae soluta repellat ex asperiores, est dicta mollitia
+          qui voluptatum!
+        </p>
+        <div>
+          <h3>Known Technologies</h3>
+          <p>Hover a card to get more information</p>
+          <div className={styles.technoTable}>
+            {skills.map((e, index: number) => (
+              <FlipSkillCard key={index} {...e} />
+            ))}
           </div>
         </div>
+        <div>
+          <h3>My GitHub</h3>
+          <Button
+            variant="contained"
+            style={{ backgroundColor: "#24292F" }}
+            startIcon={<GitHubIcon />}
+            fullWidth
+          >
+            Comme visit my repos &#128521;
+          </Button>
+        </div>
       </main>
-    </>
+    </div>
   );
 }

@@ -48,8 +48,17 @@
 .backButton {
   display: none;
 }
+.topDrawer{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
 @media screen and (max-width: 500px) {
   .backButton {
     display: flex;
   }
+  .drawerContent{
+    width: 320px;
+  }
 }
+
