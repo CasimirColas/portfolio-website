@@ -1,22 +1,38 @@
 .main {
   margin-top: 100px;
-  background-color: #ffffffcc;
   width: 90%;
-  border-radius: 30px;
+  max-width: 700px;
+  display: flex;
+  gap: 20px;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+}
+.card {
+  min-width: 100%;
+  scroll-snap-align: start;
+  margin-bottom: 15px;
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
 }
-.sectionBanner {
-  width: 90%;
-  height: 400px;
-  object-fit: none;
+/* ===== Scrollbar CSS ===== */
+/* Firefox */
+.main {
+  scrollbar-width: auto;
+  scrollbar-color: #1976d2 transparent;
 }
-.sectionLogo {
-  width: 150px;
-  background-color: white;
-  padding: 15px;
-  border-radius: 15px;
-  position: relative;
-  top: 150px;
-  right: 30%;
+
+/* Chrome, Edge, and Safari */
+.main::-webkit-scrollbar {
+  width: 16px;
+}
+
+.main::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.main::-webkit-scrollbar-thumb {
+  background-color: #1976d2;
+  border-radius: 10px;
+  border: 3px solid transparent;
 }

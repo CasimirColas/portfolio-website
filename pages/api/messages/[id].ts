@@ -18,12 +18,10 @@ export default async function userHandler(
       try {
         const message = await Message.findById(id);
         if (!message) {
-          return res
-            .status(400)
-            .json({
-              success: false,
-              error: "Message with this id was not found",
-            });
+          return res.status(400).json({
+            success: false,
+            error: "Message with this id was not found",
+          });
         }
         res.status(200).json({ success: true, data: message });
       } catch (error) {
@@ -34,12 +32,10 @@ export default async function userHandler(
       try {
         const message = await Message.findById(id);
         if (!message) {
-          return res
-            .status(400)
-            .json({
-              success: false,
-              error: "Message with this id was not found",
-            });
+          return res.status(400).json({
+            success: false,
+            error: "Message with this id was not found",
+          });
         }
         if ((req.body.request = "delete")) {
           if (req.body.deletionCode === message.deletionCode) {

@@ -56,12 +56,27 @@ function Navbar() {
   }, []);
   const [msgDialogOpen, setmsgDialogOpen] = useState(false);
   const [isDrawerOpen, setisDrawerOpen] = useState(false);
-  const [isProjectMenuOpen, setisProjectMenuOpen] = useState(false);
-  const [sendMessageMenuOpen, setsendMessageMenuOpen] = useState(false);
+  const [projectMenuAnchor, setprojectMenuAnchor] =
+    useState<null | HTMLElement>(null);
+  const [msgMenuAnchor, setmsgMenuAnchor] = useState<null | HTMLElement>(null);
   const { data, error, mutate, isValidating } = useSWR(
     "http://localhost:3000/api/messages",
     fetcher
   );
+  const ProjectMenuState = Boolean(projectMenuAnchor);
+  function handleOpenPMenu(e: React.MouseEvent<HTMLButtonElement>) {
+    setprojectMenuAnchor(e.currentTarget);
+  }
+  function handleClosePMenu() {
+    setprojectMenuAnchor(null);
+  }
+  const MsgMenuState = Boolean(msgMenuAnchor);
+  function handleOpenMsgMenu(e: React.MouseEvent<HTMLButtonElement>) {
+    setmsgMenuAnchor(e.currentTarget);
+  }
+  function handleCloseMsgMenu() {
+    setmsgMenuAnchor(null);
+  }
   return (
     <>
       <AppBar sx={{ backgroundColor: "white" }}>
@@ -81,16 +96,17 @@ function Navbar() {
             </Button>
             <Button
               startIcon={<HandymanIcon />}
-              onClick={() => {
-                setisProjectMenuOpen(true);
+              onClick={(e) => {
+                handleOpenPMenu(e);
               }}
             >
               My projects
             </Button>
             <Menu
-              open={isProjectMenuOpen}
+              anchorEl={projectMenuAnchor}
+              open={ProjectMenuState}
               onClose={() => {
-                setisProjectMenuOpen(false);
+                handleClosePMenu();
               }}
             >
               <MenuItem onClick={() => router.push("/projects")}>Menu</MenuItem>
@@ -101,16 +117,16 @@ function Navbar() {
             </Menu>
             <Button
               startIcon={<SendIcon />}
-              onClick={() => setsendMessageMenuOpen(true)}
+              onClick={(e) => handleOpenMsgMenu(e)}
             >
               Send me a Message
             </Button>
             <Menu
-              open={sendMessageMenuOpen}
+              open={MsgMenuState}
               onClose={() => {
-                setsendMessageMenuOpen(false);
+                handleCloseMsgMenu();
               }}
-              sx={{ marginTop: "64px" }}
+              anchorEl={msgMenuAnchor}
             >
               <MenuItem onClick={() => router.push("/email")}>
                 <ListItemIcon>
@@ -125,7 +141,13 @@ function Navbar() {
                 Send a message through the database
               </MenuItem>
             </Menu>
-            <Button startIcon={<DownloadIcon />}>Download my CV</Button>
+            <a
+              href="/CV/cvCasimirColas2023.pdf"
+              download
+              style={{ textDecoration: "none" }}
+            >
+              <Button startIcon={<DownloadIcon />}>Download my CV</Button>
+            </a>
             <IconButton
               size="large"
               onClick={() => {
@@ -163,18 +185,18 @@ function Navbar() {
           </Button>
           <Button
             startIcon={<HandymanIcon />}
-            onClick={() => {
-              setisProjectMenuOpen(true);
+            onClick={(e) => {
+              handleOpenPMenu(e);
             }}
           >
             My projects
           </Button>
           <Menu
-            open={isProjectMenuOpen}
+            open={ProjectMenuState}
             onClose={() => {
-              setisProjectMenuOpen(false);
+              handleClosePMenu();
             }}
-            sx={{ marginTop: "64px" }}
+            anchorEl={projectMenuAnchor}
           >
             <MenuItem onClick={() => router.push("/projects")}>Menu</MenuItem>
             <Divider />
@@ -184,16 +206,16 @@ function Navbar() {
           </Menu>
           <Button
             startIcon={<SendIcon />}
-            onClick={() => setsendMessageMenuOpen(true)}
+            onClick={(e) => handleOpenMsgMenu(e)}
           >
             Send me a Message
           </Button>
           <Menu
-            open={sendMessageMenuOpen}
+            open={MsgMenuState}
             onClose={() => {
-              setsendMessageMenuOpen(false);
+              handleCloseMsgMenu();
             }}
-            sx={{ marginTop: "64px" }}
+            anchorEl={msgMenuAnchor}
           >
             <MenuItem onClick={() => router.push("/email")}>
               <ListItemIcon>
@@ -208,7 +230,13 @@ function Navbar() {
               Send a message through the database
             </MenuItem>
           </Menu>
-          <Button startIcon={<DownloadIcon />}>Download my CV</Button>
+          <a
+            href="/CV/cvCasimirColas2023.pdf"
+            download
+            style={{ textDecoration: "none" }}
+          >
+            <Button startIcon={<DownloadIcon />}>Download my CV</Button>
+          </a>
           <IconButton
             size="large"
             onClick={() => {
