@@ -1,0 +1,22 @@
+.main {
+  margin-top: 100px;
+  background-color: #ffffffcc;
+  width: 90%;
+  border-radius: 30px;
+  display: flex;
+  flex-direction: column;
+}
+.sectionBanner {
+  width: 90%;
+  height: 400px;
+  object-fit: none;
+}
+.sectionLogo {
+  width: 150px;
+  background-color: white;
+  padding: 15px;
+  border-radius: 15px;
+  position: relative;
+  top: 150px;
+  right: 30%;
+}

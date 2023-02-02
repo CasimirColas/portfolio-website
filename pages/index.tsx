@@ -22,10 +22,6 @@ export default function Home() {
       </Head>
       <Background />
       <Navbar />
-      <div className={styles.socials}>
-        <h4>Socials</h4>
-        <div className={styles.socialGrid}></div>
-      </div>
       <main className={styles.main}>
         <div className={styles.mainContent}>
           <img

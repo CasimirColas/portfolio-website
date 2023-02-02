@@ -1,5 +1,15 @@
+import Background from "@/components/Background";
+import Navbar from "@/components/Navbar";
+import styles from "../../public/projectsPage.module.css";
+
 function ProjectsPage() {
-  return <div>ProjectsPage</div>;
+  return (
+    <>
+      <Background />
+      <Navbar />
+      <main></main>
+    </>
+  );
 }
 
 export default ProjectsPage;

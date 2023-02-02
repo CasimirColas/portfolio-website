@@ -1,54 +1,55 @@
-.drawerContent{
-    height: 100%;
-    max-width: 450px;
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
+.drawerContent {
+  height: 100%;
+  max-width: 450px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
-.messageContainer{
-    overflow-y: scroll;
-    height: 60%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: flex-start;
-    gap: 20px;
-    text-align: left;
+.messageContainer {
+  overflow-y: scroll;
+  height: 60%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 20px;
+  text-align: left;
 }
-.contactButtons{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 10px;
-    padding-block: 15px;
+.contactButtons {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding-block: 15px;
 }
 .drawerDesc {
-    margin: 25px;
-    text-align: left;
+  margin: 25px;
+  text-align: left;
 }
 .drawerTitle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 15px;
+  box-shadow: 0px 2px 4px -1px rgb(0 0 0 / 20%),
+    0px 4px 5px 0px rgb(0 0 0 / 14%), 0px 1px 10px 0px rgb(0 0 0 / 12%);
+  padding-block: 25px;
+}
+.apiref {
+  color: #1976d2;
+  text-decoration: underline;
+}
+.apiref:hover {
+  cursor: pointer;
+  color: #00acff;
+}
+.backButton {
+  display: none;
+}
+@media screen and (max-width: 500px) {
+  .backButton {
     display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 15px;
-    box-shadow: 0px 2px 4px -1px rgb(0 0 0 / 20%), 0px 4px 5px 0px rgb(0 0 0 / 14%), 0px 1px 10px 0px rgb(0 0 0 / 12%);
-    padding-block: 25px;
-}
-.apiref{
-    color: #1976D2;
-    text-decoration: underline;
-}
-.apiref:hover{
-    cursor: pointer;
-    color: #00ACFF;
-}
-.backButton{
-    display: none;
-}
-@media screen and (max-width: 500px){
-    .backButton{
-        display: flex;
-    }
+  }
 }

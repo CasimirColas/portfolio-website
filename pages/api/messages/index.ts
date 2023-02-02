@@ -25,16 +25,16 @@ export default async function handler(
     case "POST":
       try {
         const today = new Date();
-        const dd = String(today.getDate()).padStart(2, '0');
-        const mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+        const dd = String(today.getDate()).padStart(2, "0");
+        const mm = String(today.getMonth() + 1).padStart(2, "0"); //January is 0!
         const yyyy = today.getFullYear();
-        const hours = String(today.getHours())
-        const min = String(today.getMinutes())
-        const todayString = mm + '/' + dd + '/' + yyyy+" at "+ hours + ":" + min;
-        req.body.sendingDate = todayString
-        const message = await Message.create(
-          req.body
-        );
+        const hours = String(today.getHours());
+        const min = String(today.getMinutes());
+        const todayString =
+          mm + "/" + dd + "/" + yyyy + " at " + hours + ":" + min;
+        const realBody = await Object.assign({}, req.body);
+        realBody.sendingDate = todayString;
+        const message = await Message.create(realBody);
         res.status(201).json({ success: true, data: message });
       } catch (error) {
         res.status(400).json({ success: false, error: error });

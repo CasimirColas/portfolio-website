@@ -21,8 +21,10 @@ import SendTimeExtensionIcon from "@mui/icons-material/SendTimeExtension";
 import ScienceIcon from "@mui/icons-material/Science";
 import Divider from "@mui/material/Divider";
 import { useRouter } from "next/router";
+import WriteMessage from "./WriteMessage";
 
 interface MessageTypes {
+  _id: string;
   from: string;
   title: string;
   content: string;
@@ -37,6 +39,7 @@ function Navbar() {
   useEffect(() => {
     setcurrentWindow(window.location.href);
   }, []);
+  const [msgDialogOpen, setmsgDialogOpen] = useState(false);
   const [isDrawerOpen, setisDrawerOpen] = useState(false);
   const [isProjectMenuOpen, setisProjectMenuOpen] = useState(false);
   const [sendMessageMenuOpen, setsendMessageMenuOpen] = useState(false);
@@ -88,13 +91,13 @@ function Navbar() {
             }}
             sx={{ marginTop: "64px" }}
           >
-            <MenuItem>
+            <MenuItem onClick={() => router.push("/email")}>
               <ListItemIcon>
                 <ForwardToInboxIcon />
               </ListItemIcon>
               Send an email
             </MenuItem>
-            <MenuItem>
+            <MenuItem onClick={() => setmsgDialogOpen(true)}>
               <ListItemIcon>
                 <SendTimeExtensionIcon />
               </ListItemIcon>
@@ -102,7 +105,13 @@ function Navbar() {
             </MenuItem>
           </Menu>
           <Button startIcon={<DownloadIcon />}>Download my CV</Button>
-          <IconButton size="large" onClick={() => setisDrawerOpen(true)}>
+          <IconButton
+            size="large"
+            onClick={() => {
+              setisDrawerOpen(true);
+              mutate();
+            }}
+          >
             <Badge badgeContent={data?.data.length} color="error">
               <EmailIcon sx={{ color: "#1976D2" }} />
             </Badge>
@@ -143,10 +152,13 @@ function Navbar() {
               data?.data.map((e: MessageTypes, index: number) => (
                 <MessageCard
                   key={index}
+                  _id={e._id}
                   from={e.from}
                   title={e.title}
                   message={e.content}
                   date={e.sendingDate}
+                  window={currentWindow}
+                  mutate={() => mutate()}
                 />
               ))
             ) : (
@@ -154,13 +166,26 @@ function Navbar() {
             )}
           </div>
           <div className={styles.contactButtons}>
-            <Button startIcon={<SendIcon />}>Send your own message</Button>
-            <Button startIcon={<ForwardToInboxIcon />}>
+            <Button
+              startIcon={<SendIcon />}
+              onClick={() => setmsgDialogOpen(true)}
+            >
+              Send your own message
+            </Button>
+            <Button
+              startIcon={<ForwardToInboxIcon />}
+              onClick={() => router.push("/email")}
+            >
               Send me an email directly
             </Button>
           </div>
         </div>
       </Drawer>
+      <WriteMessage
+        open={msgDialogOpen}
+        closeDialog={() => setmsgDialogOpen(false)}
+        mutate={() => mutate()}
+      />
     </>
   );
 }
