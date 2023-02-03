@@ -18,12 +18,12 @@ import { useRef } from "react";
 import useOnScreen from "@/hooks/OnScreen";
 
 function ExperiencesPage() {
-  const myRefcard1 = useRef(null);
-  const myRefcard2 = useRef(null);
+  const myRefcard1 = useRef<null | HTMLDivElement>(null);
+  const myRefcard2 = useRef<null | HTMLDivElement>(null);
   const isCard1Visible = useOnScreen(myRefcard1);
   const isCard2Visible = useOnScreen(myRefcard2);
-  const scrollToCard1 = () => myRefcard1.current.scrollIntoView();
-  const scrollToCard2 = () => myRefcard2.current.scrollIntoView();
+  const scrollToCard1 = () => myRefcard1.current!.scrollIntoView();
+  const scrollToCard2 = () => myRefcard2.current!.scrollIntoView();
 
   return (
     <div

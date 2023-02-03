@@ -19,6 +19,6 @@
       "@/*": ["./*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "hooks/OnScreen.jsx", "pages/experiences.jsx"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "hooks/OnScreen.tsx", "pages/experiences.tsx"],
   "exclude": ["node_modules"]
 }
