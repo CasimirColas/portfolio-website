@@ -60,7 +60,7 @@ function Navbar() {
     useState<null | HTMLElement>(null);
   const [msgMenuAnchor, setmsgMenuAnchor] = useState<null | HTMLElement>(null);
   const { data, error, mutate, isValidating } = useSWR(
-    "http://localhost:3000/api/messages",
+    `${currentWindow}api/messages`,
     fetcher
   );
   const ProjectMenuState = Boolean(projectMenuAnchor);
