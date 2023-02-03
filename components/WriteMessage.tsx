@@ -26,7 +26,7 @@ function WriteMessage({ open, closeDialog, mutate }: Props) {
   const [dCode, setdCode] = useState("");
   const [currentWindow, setcurrentWindow] = useState("");
   useEffect(() => {
-    setcurrentWindow(window.location.href);
+    setcurrentWindow("https://" + window.location.hostname + "/");
   }, []);
 
   function resetInputs() {
