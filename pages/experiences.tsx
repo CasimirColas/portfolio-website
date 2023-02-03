@@ -31,7 +31,6 @@ function ExperiencesPage() {
         display: "flex",
         alignItems: "center",
         flexDirection: "column",
-        gap: "20px",
         width: "100%",
         justifyContent: "center",
       }}

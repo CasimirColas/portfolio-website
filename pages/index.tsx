@@ -58,14 +58,19 @@ export default function Home() {
         </div>
         <div>
           <h3>My GitHub</h3>
-          <Button
-            variant="contained"
-            style={{ backgroundColor: "#24292F" }}
-            startIcon={<GitHubIcon />}
-            fullWidth
+          <a
+            href="https://github.com/CasimirColas/"
+            style={{ textDecoration: "none" }}
           >
-            Comme visit my repos &#128521;
-          </Button>
+            <Button
+              variant="contained"
+              style={{ backgroundColor: "#24292F" }}
+              startIcon={<GitHubIcon />}
+              fullWidth
+            >
+              Comme visit my repos &#128521;
+            </Button>
+          </a>
         </div>
       </main>
     </div>
