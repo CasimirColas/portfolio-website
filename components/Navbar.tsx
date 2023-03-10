@@ -41,7 +41,11 @@ function Navbar() {
   const [windowWidth, setwindowWidth] = useState<number>();
   const [responsiveNav, setresponsiveNav] = useState(false);
   useEffect(() => {
-    setcurrentWindow("https://" + window.location.hostname + "/");
+    if (window.location.hostname === "localhost") {
+      setcurrentWindow("http://localhost:3000/");
+    } else {
+      setcurrentWindow("https://" + window.location.hostname + "/");
+    }
     setwindowWidth(window.innerWidth);
   }, []);
   useEffect(() => {
